@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <style>
+             .flip
+            {
+                transform:rotateY(180deg)
+            }
+            #basket,#uovo{
+                width:100px;height: 100px;
+                bottom :0px;
+                /* z-index:9; */
+                position: absolute;
+            }
+            #uovo{
+                visibility: hidden;
+            }
+            #egg{
+                width:70px;
+                height: 60px;
+                position: absolute;
+                /* bottom:0px */
+            }
+
+        </style>
+    </head>
+<body>
+   <img src="images/basket.png" id="basket"/>
+    
+    <img src="images/Uovo_sorridente.png" id="uovo"/>
+    <img src="images/1182.png" id="egg"/>
+    <script>
+    
+
+        let basketEggs=document.querySelector("#basket");
+      
+        let body=document.querySelector("body")
+        let left;
+        body.addEventListener("keydown",function(e){
+            if (e.key=="ArrowRight"){
+                // console.log(left)
+                
+                if(left<window.innerWidth){
+                    left=left+30;
+                    
+                    basketEggs.style.left=+left+"px"
+                   
+                }else(left=0)
+
+            }else if(e.key=="ArrowLeft"){
+                if(left>0){
+                    
+                    left=left-30                
+                    basketEggs.style.left=+left+"px"
+                    
+                }else(left=0)
+                
+            }
+        })
+      
+        let eggObject=document.querySelector("#egg");
+        let brockenObject=document.querySelector("#uovo")
+        
+        
+        
+        
+        function moveDown()
+        {
+            tope=0;
+            let timerID=setInterval(()=>{
+                tope+=10;
+                if(tope<window.innerHeight-(eggObject.height)){
+                    
+                    eggObject.style.top=tope;
+                     
+                }
+               
+                else{
+                    brockenEgg()
+                    
+                    tope=0
+                   
+                    eggObject.style.left=Math.floor(Math.random() * 500)}
+            },100) 
+
+           
+            
+        }
+        //moveDown()
+        // debugger
+        function brockenEgg(){
+        
+            if (
+                ((eggObject.x > basketEggs.x && eggObject.x < basketEggs.x + basketEggs.width) ||
+                    (eggObject.x + eggObject.width > basketEggs.x &&
+                    eggObject.x + eggObject.width < basketEggs.x + basketEggs.width)) &&
+                    eggObject.y + eggObject.height > basketEggs.y &&
+                    eggObject.y + eggObject.height < basketEggs.y + basketEggs.height
+                )
+                {
+                    console.log("ok")
+                }
+                else{
+                    brockenObject.style.visibility="visible"
+                    eggObject.style.visibility="hidden"
+                    console.log("yes")
+                }
+        
+    }
+    //brockenEgg()
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+    </script>
+</body>
+</html>
